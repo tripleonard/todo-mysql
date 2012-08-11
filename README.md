@@ -60,6 +60,10 @@ To list the last 20 completed todos in descending order
 
 	mysql> call done;
 	
+To change a priority level, first input is id of task and second is new priority
+
+	mysql> call priority(1,2);
+	
 Fork and pull to contribute. 
 
 

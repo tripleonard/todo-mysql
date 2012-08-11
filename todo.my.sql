@@ -137,6 +137,26 @@ $$
 
 DELIMITER ;
 
+/* change the priority level of a task */
+
+DROP PROCEDURE IF EXISTS priority;
+
+DELIMITER $$
+
+CREATE PROCEDURE priority(
+	id_in smallint,
+	priority_in smallint)
+	
+BEGIN
+	UPDATE list SET priority=priority_in
+	WHERE id_in=list.id;
+
+END;
+
+$$
+
+DELIMITER ;
+
 /* list last 20 completed todos ascending */
 
 DROP PROCEDURE IF EXISTS done;
