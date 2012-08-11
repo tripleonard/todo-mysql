@@ -17,15 +17,15 @@ Start MySQL client
 
 	mysql -u username -p
 	
-	use todo;
+	mysql> use todo;
 
 To add a new todo
 	
-	 call new('buy milk',1,'errand','');
+	 mysql> call new('buy milk',1,'errand','');
 
 To list todos by priority
 	
-	call list;
+	mysql> call list;
 	+----+-------------------------------+----------+----------+---------+---------------------+
 	| id | todo                          | priority | context  | project | date_created        |
 	+----+-------------------------------+----------+----------+---------+---------------------+
@@ -40,7 +40,7 @@ To list todos by priority
 	
 To list all todos with a specific context
 	
-	call context('errand');
+	mysql> call context('errand');
 	+----+-------------------------------+----------+----------+---------+---------------------+
 	| id | todo                          | priority | context  | project | date_created        |
 	+----+-------------------------------+----------+----------+---------+---------------------+
@@ -50,16 +50,16 @@ To list all todos with a specific context
 
 To list all todos for a specific project
 	
-	call project('launch');
+	mysql> call project('launch');
 	
 To mark complete, removes from list, and copies to done table for archiving	
 	
-	call do(14);
+	mysql> call do(14);
 
 To list the last 20 completed todos in descending order
 
-	call done;
+	mysql> call done;
 	
-Fork and pull to contrubute. Thanks!
+Fork and pull to contribute. Thanks!
 
 
