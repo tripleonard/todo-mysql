@@ -98,7 +98,7 @@ BEGIN
 	
 	SELECT todo,priority,context,project
 	FROM list
-	WHERE context=project_in;
+	WHERE project=project_in;
 
 END;
 

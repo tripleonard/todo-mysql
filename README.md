@@ -19,7 +19,7 @@ Start MySQL client
 	
 	mysql> use todo;
 
-To add a new todo
+To add a new todo, ('task',priority level,'context','project')
 	
 	 mysql> call new('buy milk',1,'errand','');
 
