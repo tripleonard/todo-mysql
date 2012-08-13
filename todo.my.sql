@@ -37,7 +37,6 @@ CREATE PROCEDURE new(
 	priority_in smallint,
 	context_in varchar(30),
 	project_in varchar(30))
-	
 BEGIN
 	
 	INSERT INTO list(todo,priority,context,project)
@@ -57,7 +56,6 @@ DELIMITER $$
 
 CREATE PROCEDURE list()
 BEGIN
-	
 	SELECT id,todo,priority,context,project
 	FROM list
 	ORDER BY priority;
@@ -76,7 +74,6 @@ DELIMITER $$
 
 CREATE PROCEDURE context(context_in varchar(30))
 BEGIN
-	
 	SELECT todo,priority,context,project
 	FROM list
 	WHERE context=context_in;
@@ -95,7 +92,6 @@ DELIMITER $$
 
 CREATE PROCEDURE project(project_in varchar(30))
 BEGIN
-	
 	SELECT todo,priority,context,project
 	FROM list
 	WHERE project=project_in;
@@ -146,7 +142,6 @@ DELIMITER $$
 CREATE PROCEDURE priority(
 	id_in smallint,
 	priority_in smallint)
-	
 BEGIN
 	UPDATE list SET priority=priority_in
 	WHERE id_in=list.id;
@@ -165,7 +160,6 @@ DELIMITER $$
 
 CREATE PROCEDURE done()
 BEGIN
-	
 	SELECT todo,priority,context,project,date_completed
 	FROM done
 	ORDER BY date_completed DESC
