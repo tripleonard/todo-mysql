@@ -48,7 +48,7 @@ $$
 
 DELIMITER ;
 	
-/* list todos order by priority */
+/* list todos order by project then priority */
 
 DROP PROCEDURE IF EXISTS list;
 
@@ -76,7 +76,8 @@ CREATE PROCEDURE context(context_in varchar(30))
 BEGIN
 	SELECT id,todo,priority,context,project
 	FROM list
-	WHERE context=context_in;
+	WHERE context=context_in
+	ORDER BY priority;
 
 END;
 
