@@ -74,7 +74,7 @@ DELIMITER $$
 
 CREATE PROCEDURE context(context_in varchar(30))
 BEGIN
-	SELECT todo,priority,context,project
+	SELECT id,todo,priority,context,project
 	FROM list
 	WHERE context=context_in;
 
@@ -92,9 +92,10 @@ DELIMITER $$
 
 CREATE PROCEDURE project(project_in varchar(30))
 BEGIN
-	SELECT todo,priority,context,project
+	SELECT id,todo,priority,context,project
 	FROM list
-	WHERE project=project_in;
+	WHERE project=project_in
+	ORDER BY priority;
 
 END;
 
@@ -160,7 +161,7 @@ DELIMITER $$
 
 CREATE PROCEDURE done()
 BEGIN
-	SELECT todo,priority,context,project,date_completed
+	SELECT id,todo,priority,context,project,date_completed
 	FROM done
 	ORDER BY date_completed DESC
 	LIMIT 20;
