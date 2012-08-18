@@ -64,7 +64,7 @@ To change a priority level, first input is id of task and second is new priority
 
 	mysql> call priority(1,2);
 	
-To export list to Dropbox - this is a work in progress as you have to add mysql user permissions and mysql can not overwrite an existing file for security reasons.  So, you need to delete the exported file (todo.txt) to run this again. It's a kludge.
+To export list to Dropbox - this is a work in progress as you have to add mysql user permissions to folder and mysql cannot overwrite an existing file for security reasons.  So, you need to delete the exported file (todo.txt) to run this again. It's a kludge.
 
 	mysql> call dropbox;
 	
