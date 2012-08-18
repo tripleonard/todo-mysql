@@ -56,9 +56,9 @@ DELIMITER $$
 
 CREATE PROCEDURE list()
 BEGIN
-	SELECT id,todo,priority,context,project
+	SELECT id,todo,priority,project,context
 	FROM list
-	ORDER BY priority;
+	ORDER BY project,priority;
 
 END;
 
@@ -146,6 +146,27 @@ CREATE PROCEDURE priority(
 BEGIN
 	UPDATE list SET priority=priority_in
 	WHERE id_in=list.id;
+
+END;
+
+$$
+
+DELIMITER ;
+
+/* export list to dropbox - you will need to add permissions to mysql, and delete todo.txt before running a second time */
+
+DROP PROCEDURE IF EXISTS dropbox;
+
+DELIMITER $$
+
+CREATE PROCEDURE dropbox()
+BEGIN
+	
+	SELECT id,priority,todo,context,project 
+	INTO OUTFILE '/Users/trip/Dropbox/todo/todo.txt'
+	LINES TERMINATED BY '\n'
+	FROM list
+	ORDER BY project,priority;
 
 END;
 
