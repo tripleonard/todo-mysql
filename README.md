@@ -23,7 +23,7 @@ To add a new todo, ('task',priority level,'context','project')
 	
 	 mysql> call new('buy milk',1,'errand','');
 
-To list todos by priority
+To list todos by project then priority
 	
 	mysql> call list;
 	+----+-------------------------------+----------+----------+---------+---------------------+
@@ -64,7 +64,11 @@ To change a priority level, first input is id of task and second is new priority
 
 	mysql> call priority(1,2);
 	
-Fork and pull to contribute. 
+To export list to Dropbox - this is a work in progress as you have to add mysql user permissions and mysql can not overwrite an existing file for security reasons.  So, you need to delete the exported file (todo.txt) to run this again. It's a kludge.
+
+	mysql> call dropbox;
+	
+
 
 
 
