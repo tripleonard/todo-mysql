@@ -154,17 +154,17 @@ $$
 
 DELIMITER ;
 
-/* export list to dropbox - you will need to add permissions to mysql, and delete todo.txt before running a second time */
+/* export list to skydriv (or dropbox) - you will need to add permissions to mysql, and delete todo.txt before running a second time */
 
-DROP PROCEDURE IF EXISTS dropbox;
+DROP PROCEDURE IF EXISTS skydrive;
 
 DELIMITER $$
 
-CREATE PROCEDURE dropbox()
+CREATE PROCEDURE skydrive()
 BEGIN
 	
 	SELECT id,priority,todo,context,project 
-	INTO OUTFILE '/Users/trip/Dropbox/todo/todo.txt'
+	INTO OUTFILE '/Users/trip/SkyDrive/todo/todo.txt'
 	LINES TERMINATED BY '\n'
 	FROM list
 	ORDER BY project,priority;
