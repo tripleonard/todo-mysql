@@ -3,7 +3,7 @@ A Todo List Manager as a MySQL Database
 
 Are you a MySQL DBA or have the mysql client open all the time? Do you want a cross 
 platform todo list manager?  This may be for you. I have created a few 
-stored procedures to do the work. 
+stored procedures to do the work. Inspired by Gina Trapani's [todo.txt](https://github.com/ginatrapani/todo.txt-cli).
 
 Installation
 ------------
@@ -64,9 +64,9 @@ To change a priority level, first input is id of task and second is new priority
 
 	mysql> call priority(1,2);
 	
-To export list to Dropbox - this is a work in progress as you have to add mysql user permissions to folder and mysql cannot overwrite an existing file for security reasons.  So, you need to delete the exported file (todo.txt) to run this again. It's a kludge.
+To export list to skydrive (or dropbox) - this is a work in progress as you have to add mysql user permissions to folder and mysql cannot overwrite an existing file for security reasons.  So, you need to delete the exported file (todo.txt) to run this again. It's a kludge.
 
-	mysql> call dropbox;
+	mysql> call skydrive;
 	
 
 
