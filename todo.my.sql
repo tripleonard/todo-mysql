@@ -74,7 +74,7 @@ DELIMITER $$
 
 CREATE PROCEDURE context(context_in varchar(30))
 BEGIN
-	SELECT id,todo,priority,context,project
+	SELECT id,todo,priority,project,context
 	FROM list
 	WHERE context=context_in
 	ORDER BY priority;
@@ -93,7 +93,7 @@ DELIMITER $$
 
 CREATE PROCEDURE project(project_in varchar(30))
 BEGIN
-	SELECT id,todo,priority,context,project
+	SELECT id,todo,priority,project,context
 	FROM list
 	WHERE project=project_in
 	ORDER BY priority;
@@ -154,7 +154,7 @@ $$
 
 DELIMITER ;
 
-/* export list to skydriv (or dropbox) - you will need to add permissions to mysql, and delete todo.txt before running a second time */
+/* export list to skydrive (or dropbox) - you will need to add permissions to mysql, and delete todo.txt before running a second time */
 
 DROP PROCEDURE IF EXISTS skydrive;
 
