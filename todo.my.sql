@@ -13,7 +13,7 @@ CREATE TABLE list(
 	context varchar(30),
 	project varchar(30),
 	date_created timestamp NOT NULL
-	)ENGINE=InnoDB;
+	)ENGINE=MyISAM;
 	
 DROP TABLE IF EXISTS done;
 CREATE TABLE done(
@@ -24,7 +24,7 @@ CREATE TABLE done(
 	project varchar(30),
 	date_created datetime,
 	date_completed timestamp NOT NULL
-	)ENGINE=InnoDB;
+	)ENGINE=MyISAM;
 
 /* create a new todo */
 
@@ -35,12 +35,12 @@ DELIMITER $$
 CREATE PROCEDURE new(
 	todo_in varchar(100),
 	priority_in smallint,
-	context_in varchar(30),
-	project_in varchar(30))
+	project_in varchar(30),
+	context_in varchar(30))
 BEGIN
 	
-	INSERT INTO list(todo,priority,context,project)
-	VALUES(todo_in,priority_in,context_in,project_in);
+	INSERT INTO list(todo,priority,project,context)
+	VALUES(todo_in,priority_in,project_in,context_in);
 
 END;
 
