@@ -12,7 +12,8 @@ CREATE TABLE list(
 	priority smallint,
 	context varchar(30),
 	project varchar(30),
-	date_created timestamp NOT NULL
+	date_created timestamp NOT NULL,
+	FULLTEXT KEY(todo)
 	)ENGINE=MyISAM;
 	
 DROP TABLE IF EXISTS done;
@@ -23,7 +24,8 @@ CREATE TABLE done(
 	context varchar(30),
 	project varchar(30),
 	date_created datetime,
-	date_completed timestamp NOT NULL
+	date_completed timestamp NOT NULL,
+	FULLTEXT KEY(todo)
 	)ENGINE=MyISAM;
 
 /* create a new todo */
@@ -187,6 +189,26 @@ BEGIN
 	FROM done
 	ORDER BY date_completed DESC
 	LIMIT 20;
+
+END;
+
+$$
+
+DELIMITER ;
+
+/* text search for completed tasks */
+
+DROP PROCEDURE IF EXISTS find;
+
+DELIMITER $$
+
+CREATE PROCEDURE find(find_in text)
+BEGIN
+	SELECT id,todo,priority,project,context,date_completed 
+	FROM done
+	WHERE MATCH todo AGAINST (find_in IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)
+	ORDER BY date_completed;
+
 
 END;
 
