@@ -60,7 +60,7 @@ CREATE PROCEDURE list()
 BEGIN
 	SELECT id,todo,priority,project,context
 	FROM list
-	ORDER BY project,priority;
+	ORDER BY priority,project;
 
 END;
 

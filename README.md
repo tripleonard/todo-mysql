@@ -23,7 +23,7 @@ To add a new todo, ('task',priority level,'project','context')
 	
 	 mysql> call new('buy milk',1,'home','errand');
 
-To list todos by project then priority
+To list todos by priority then project
 	
 	mysql> call list;
 	+----+-------------------------------+----------+----------+---------+---------------------+
@@ -68,7 +68,7 @@ To export list to skydrive (or dropbox) - this is a work in progress as you have
 
 	mysql> call skydrive;
 	
-To search completed tasks
+To search completed tasks - this feature is not working as I would like.  It will only match on whole words and exact phrases of 4 characters or more right now.
 
 	mysql> call find('apple');
 	
