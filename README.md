@@ -64,6 +64,10 @@ To change a priority level, first input is id of task and second is new priority
 
 	mysql> call priority(1,2);
 	
+To append text to the end of a task (make sure there is a preceding space if desired)
+
+	mysql> call append(23,' something at the end');
+	
 To export list to skydrive (or dropbox) - this is a work in progress as you have to add mysql user permissions to folder and mysql cannot overwrite an existing file for security reasons.  So, you need to delete the exported file (todo.txt) to run this again. It's a kludge.
 
 	mysql> call skydrive;
