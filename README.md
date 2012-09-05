@@ -68,6 +68,10 @@ To append text to the end of a task (make sure there is a preceding space if des
 
 	mysql> call append(23,' something at the end');
 	
+To prepend text to the beginning of a task (make sure there is a trailing space if desired)
+
+	mysql> call prepend(23,'something at the beginning ');
+	
 To export list to skydrive (or dropbox) - this is a work in progress as you have to add mysql user permissions to folder and mysql cannot overwrite an existing file for security reasons.  So, you need to delete the exported file (todo.txt) to run this again. It's a kludge.
 
 	mysql> call skydrive;
@@ -79,8 +83,6 @@ To search completed tasks - this feature is not working as I would like.  It wil
 Future features
 ---------------
 
-* Text search completed todos
-* Prepend and append todo
 
 
 
