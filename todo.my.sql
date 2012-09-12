@@ -184,6 +184,34 @@ $$
 
 DELIMITER ;
 
+/* prepend text to a task a task */
+
+DROP PROCEDURE IF EXISTS prepend;
+
+DELIMITER $$
+
+CREATE PROCEDURE prepend(
+	id_in smallint,
+	prepend_in text)
+BEGIN
+	DECLARE OldText_v text;
+	DECLARE NewText_v text;
+	
+	SELECT todo INTO OldText_v
+	FROM list
+	WHERE id_in=list.id;
+	
+	SELECT CONCAT(prepend_in, OldText_v) INTO NewText_v;
+	
+	UPDATE list SET todo=NewText_v
+	WHERE id_in=list.id;
+
+END;
+
+$$
+
+DELIMITER ;
+
 /* export list to skydrive (or dropbox) - you will need to add permissions to mysql, and delete todo.txt before running a second time */
 
 DROP PROCEDURE IF EXISTS skydrive;
