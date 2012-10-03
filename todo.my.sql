@@ -262,7 +262,7 @@ CREATE PROCEDURE find(find_in text)
 BEGIN
 	SELECT id,todo,priority,project,context,date_completed 
 	FROM done
-	WHERE MATCH todo AGAINST (find_in IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)
+	WHERE MATCH todo AGAINST (find_in IN BOOLEAN MODE)
 	ORDER BY date_completed;
 
 
