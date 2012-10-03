@@ -8,9 +8,8 @@ USE todo;
 DROP TABLE IF EXISTS list;
 CREATE TABLE list(
 	id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-	todo text,
 	priority smallint,
-	context varchar(30),
+	todo text,
 	project varchar(30),
 	date_created timestamp NOT NULL,
 	FULLTEXT KEY(todo)
@@ -19,9 +18,8 @@ CREATE TABLE list(
 DROP TABLE IF EXISTS done;
 CREATE TABLE done(
 	id int,
-	todo text,
 	priority smallint,
-	context varchar(30),
+	todo text,
 	project varchar(30),
 	date_created datetime,
 	date_completed timestamp NOT NULL,
@@ -35,14 +33,13 @@ DROP PROCEDURE IF EXISTS new;
 DELIMITER $$
 
 CREATE PROCEDURE new(
-	todo_in varchar(100),
 	priority_in smallint,
-	project_in varchar(30),
-	context_in varchar(30))
+	todo_in varchar(100),
+	project_in varchar(30))
 BEGIN
 	
-	INSERT INTO list(todo,priority,project,context)
-	VALUES(todo_in,priority_in,project_in,context_in);
+	INSERT INTO list(priority,todo,project)
+	VALUES(priority_in,todo_in,project_in);
 
 END;
 
@@ -58,7 +55,7 @@ DELIMITER $$
 
 CREATE PROCEDURE list()
 BEGIN
-	SELECT id,todo,priority,project,context
+	SELECT id,priority,todo,project
 	FROM list
 	ORDER BY priority,project;
 
@@ -76,9 +73,9 @@ DELIMITER $$
 
 CREATE PROCEDURE context(context_in varchar(30))
 BEGIN
-	SELECT id,todo,priority,project,context
+	SELECT id,priority,todo,project
 	FROM list
-	WHERE context=context_in
+	WHERE MATCH todo AGAINST (context_in IN BOOLEAN MODE)
 	ORDER BY priority;
 
 END;
@@ -95,7 +92,7 @@ DELIMITER $$
 
 CREATE PROCEDURE project(project_in varchar(30))
 BEGIN
-	SELECT id,todo,priority,project,context
+	SELECT id,priority,todo,project
 	FROM list
 	WHERE project=project_in
 	ORDER BY priority;
@@ -115,18 +112,17 @@ DELIMITER $$
 CREATE PROCEDURE do(id_in int)
 BEGIN
 	DECLARE ListId_v int;
-	DECLARE Todo_v text;
 	DECLARE Priority_v smallint;
-	DECLARE Context_v varchar(30);
+	DECLARE Todo_v text;
 	DECLARE Project_v varchar(30);
 	DECLARE DateCreated_v datetime;
 	
-	SELECT id,todo,priority,context,project,date_created INTO ListId_v,Todo_v,Priority_v,Context_v,Project_v,DateCreated_v
+	SELECT id,priority,todo,project,date_created INTO ListId_v,Priority_v,Todo_v,Project_v,DateCreated_v
 	FROM todo.list
 	WHERE id_in=id;
 
-	INSERT INTO done(id,todo,priority,context,project,date_created)
-	VALUES (ListId_v,Todo_v,Priority_v,Context_v,Project_v,DateCreated_v);
+	INSERT INTO done(id,priority,todo,project,date_created)
+	VALUES (ListId_v,Priority_v,Todo_v,Project_v,DateCreated_v);
 	
 	DELETE FROM list
 	WHERE id_in=list.id;
@@ -221,7 +217,7 @@ DELIMITER $$
 CREATE PROCEDURE skydrive()
 BEGIN
 	
-	SELECT id,priority,todo,context,project 
+	SELECT id,priority,todo,project 
 	INTO OUTFILE '/Users/trip/SkyDrive/todo/todo.txt'
 	LINES TERMINATED BY '\n'
 	FROM list
@@ -241,7 +237,7 @@ DELIMITER $$
 
 CREATE PROCEDURE done()
 BEGIN
-	SELECT id,todo,priority,context,project,date_completed
+	SELECT id,priority,todo,project,date_completed
 	FROM done
 	ORDER BY date_completed DESC
 	LIMIT 20;
@@ -260,7 +256,7 @@ DELIMITER $$
 
 CREATE PROCEDURE find(find_in text)
 BEGIN
-	SELECT id,todo,priority,project,context,date_completed 
+	SELECT id,priority,todo,project,date_completed 
 	FROM done
 	WHERE MATCH todo AGAINST (find_in IN BOOLEAN MODE)
 	ORDER BY date_completed;
