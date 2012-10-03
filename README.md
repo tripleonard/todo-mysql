@@ -19,44 +19,47 @@ Start MySQL client
 	
 	mysql> use todo;
 
-To add a new todo, ('task',priority level,'project','context')
+To add a new todo, (priority level,'task with @context','project')
 	
-	 mysql> call new('buy milk',1,'home','errand');
+	 mysql> call new(1,'buy milk @errand','home');
 
 To list todos by priority then project
 	
 	mysql> call list;
-	+----+-------------------------------+----------+----------+---------+---------------------+
-	| id | todo                          | priority | project  | context | date_created        |
-	+----+-------------------------------+----------+----------+---------+---------------------+
-	|  1 | get sql queries from backup   |        1 | work     | computer| 2012-08-04 06:27:18 |
-	|  3 | order good to go card         |        1 | home     | computer| 2012-08-04 06:27:18 |
-	|  4 | write thankyou note           |        1 | home     | desk    | 2012-08-04 06:27:18 |
-	|  5 | sched eye exam for son        |        2 | home     | call    | 2012-08-09 15:03:59 |
-	|  6 | buy Scott gift card thank you |        2 | launch   | errand  | 2012-08-09 15:09:36 |
-	|  9 | organize DVD collection       |        4 | home     | NULL    | 2012-08-09 16:29:27 |
-	| 10 | scan notebook in to pdf       |        4 | home     | computer| 2012-08-09 16:30:37 |
-	+----+-------------------------------+----------+----------+---------+---------------------+
+	+----+----------+------------------------------------------------------+----------+
+	| id | priority | todo                                                 | project  |
+	+----+----------+------------------------------------------------------+----------+
+	| 12 |        1 | create inbox process for kiddos school forms @desk   | home     |
+	| 10 |        1 | create perl todo list manager @computer              | personal |
+	|  3 |        2 | order good to go card @computer                      | home     |
+	|  5 |        2 | buy beth 1/2 violin @errand                          | home     |
+	| 11 |        2 | glue camera lens cap to strap @desk                  | home     |
+	|  4 |        3 | sched eye exam for scott @call                       | home     |
+	|  6 |        3 | call doc to schedule ingrown tow fix @call           | home     |
+	|  8 |        4 | organized DVD collection @desk                       | home     |
+	|  9 |        4 | scan notebook in to pdf @computer                    | home     |
+	|  7 |        4 | create wordpress.com acct for @computer              | personal |
+	+----+----------+------------------------------------------------------+----------+
 	
 To list all todos with a specific context
-	
-	mysql> call context('errand');
-	+----+-------------------------------+----------+----------+---------+---------------------+
-	| id | todo                          | priority | context  | project | date_created        |
-	+----+-------------------------------+----------+----------+---------+---------------------+
-	|  6 | buy Scott gift card thank you |        2 | errand   | NULL    | 2012-08-09 15:09:36 |
-	+----+-------------------------------+----------+----------+---------+---------------------+
+
+	mysql> call context('@errand');
+	+----+----------+-----------------------------+---------+
+	| id | priority | todo                        | project |
+	+----+----------+-----------------------------+---------+
+	|  5 |        2 | buy beth 1/2 violin @errand | home    |
+	+----+----------+-----------------------------+---------+
 
 
 To list all todos for a specific project
 	
-	mysql> call project('launch');
+	mysql> call project('home');
 	
 To mark complete, remove from list, and copy to done table for archiving	
 	
 	mysql> call do(14);
 
-To list the last 20 completed todos in descending order
+To list the last 20 completed todos in descending completion order
 
 	mysql> call done;
 	
