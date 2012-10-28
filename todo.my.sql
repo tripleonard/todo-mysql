@@ -55,9 +55,10 @@ DELIMITER $$
 
 CREATE PROCEDURE list()
 BEGIN
-	SELECT id,priority,todo,project
+	SELECT priority,id,todo,project
 	FROM list
-	ORDER BY priority,project;
+	GROUP BY project
+	ORDER BY priority,date_created;
 
 END;
 
