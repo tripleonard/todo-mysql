@@ -62,17 +62,17 @@ $$
 
 DELIMITER ;
 
-/* list todos with a particular context */
+/* list todos with a particular context or of a particular project */
 
-DROP PROCEDURE IF EXISTS context;
+DROP PROCEDURE IF EXISTS sort;
 
 DELIMITER $$
 
-CREATE PROCEDURE context(context_in varchar(30))
+CREATE PROCEDURE sort(sort_in varchar(30))
 BEGIN
 	SELECT id,priority,todo
 	FROM list
-	WHERE MATCH todo AGAINST (context_in IN BOOLEAN MODE)
+	WHERE MATCH todo AGAINST (sort_in IN BOOLEAN MODE)
 	ORDER BY priority;
 
 END;
@@ -80,25 +80,6 @@ END;
 $$
 
 DELIMITER ;
-
-/* list todos for a particular project */
-
--- DROP PROCEDURE IF EXISTS project;
--- 
--- DELIMITER $$
--- 
--- CREATE PROCEDURE project(project_in varchar(30))
--- BEGIN
--- 	SELECT id,priority,todo,project
--- 	FROM list
--- 	WHERE project=project_in
--- 	ORDER BY priority;
--- 
--- END;
--- 
--- $$
--- 
--- DELIMITER ;
 	
 /* move completed task to done table and delete from list */
 
