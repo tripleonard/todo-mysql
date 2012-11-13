@@ -19,41 +19,42 @@ Start MySQL client
 	
 	mysql> use todo;
 
-To add a new todo, (priority level,'task with @context','project')
+Operators are used for sorting
+
+	@ - Context
+	# - Project
+	\ - People
+
+To add a new todo, (priority level,'task with @context')
 	
-	 mysql> call new(1,'buy milk @errand','home');
+	 mysql> call new(1,'buy milk @errand #home');
 
 To list todos by priority then project
 	
 	mysql> call list;
-	+----+----------+------------------------------------------------------+----------+
-	| id | priority | todo                                                 | project  |
-	+----+----------+------------------------------------------------------+----------+
-	| 12 |        1 | create inbox process for kiddos school forms @desk   | home     |
-	| 10 |        1 | create perl todo list manager @computer              | personal |
-	|  3 |        2 | order good to go card @computer                      | home     |
-	|  5 |        2 | buy beth 1/2 violin @errand                          | home     |
-	| 11 |        2 | glue camera lens cap to strap @desk                  | home     |
-	|  4 |        3 | sched eye exam for scott @call                       | home     |
-	|  6 |        3 | call doc to schedule ingrown tow fix @call           | home     |
-	|  8 |        4 | organized DVD collection @desk                       | home     |
-	|  9 |        4 | scan notebook in to pdf @computer                    | home     |
-	|  7 |        4 | create wordpress.com acct for @computer              | personal |
-	+----+----------+------------------------------------------------------+----------+
+	+----+----------+------------------------------------------------------+
+	| id | priority | todo                                                 |
+	+----+----------+------------------------------------------------------+
+	| 12 |        1 | create inbox process for kiddos school forms @desk   |
+	| 10 |        1 | create perl todo list manager @computer              |
+	|  3 |        2 | order good to go card @computer                      |
+	|  5 |        2 | buy \beth 1/2 violin @errand #home                   |
+	| 11 |        2 | glue camera lens cap to strap @desk                  |
+	|  4 |        3 | sched eye exam for scott @call #home                 |
+	|  6 |        3 | call doc to schedule ingrown tow fix @call           |
+	|  8 |        4 | organized DVD collection @desk                       |
+	|  9 |        4 | scan notebook in to pdf @computer                    |
+	|  7 |        4 | create wordpress.com acct for @computer              |
+	+----+----------+------------------------------------------------------+
 	
-To list all todos with a specific context
+To list all todos with a specific context, project or person
 
-	mysql> call context('@errand');
-	+----+----------+-----------------------------+---------+
-	| id | priority | todo                        | project |
-	+----+----------+-----------------------------+---------+
-	|  5 |        2 | buy beth 1/2 violin @errand | home    |
-	+----+----------+-----------------------------+---------+
-
-
-To list all todos for a specific project
-	
-	mysql> call project('home');
+	mysql> call sort('@errand');
+	+----+----------+-----------------------------+
+	| id | priority | todo                        |
+	+----+----------+-----------------------------+
+	|  5 |        2 | buy beth 1/2 violin @errand |
+	+----+----------+-----------------------------+
 	
 To mark complete, remove from list, and copy to done table for archiving	
 	
@@ -79,7 +80,7 @@ To export list to skydrive (or dropbox) - this is a work in progress as you have
 
 	mysql> call skydrive;
 	
-To search completed tasks - this feature is not working as I would like.  It will only match on whole words and exact phrases of 4 characters or more right now.
+To search _completed_ tasks - this feature is not working as I would like.  It will only match on whole words and exact phrases of 4 characters or more right now.
 
 	mysql> call find('apple');
 	
