@@ -57,8 +57,7 @@ CREATE PROCEDURE list()
 BEGIN
 	SELECT priority,id,todo,project
 	FROM list
-	GROUP BY project
-	ORDER BY priority,date_created;
+	ORDER BY priority,project,date_created DESC;
 
 END;
 
