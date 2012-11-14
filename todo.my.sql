@@ -32,7 +32,7 @@ DELIMITER $$
 
 CREATE PROCEDURE new(
 	priority_in smallint,
-	todo_in varchar(100))
+	todo_in text)
 BEGIN
 	
 	INSERT INTO list(priority,todo)
