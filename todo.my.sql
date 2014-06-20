@@ -62,17 +62,17 @@ $$
 
 DELIMITER ;
 
-/* list todos with a particular context or of a particular project */
+/* filter todos with a particular context or of a particular project */
 
-DROP PROCEDURE IF EXISTS sort;
+DROP PROCEDURE IF EXISTS filter;
 
 DELIMITER $$
 
-CREATE PROCEDURE sort(sort_in varchar(30))
+CREATE PROCEDURE filter(filter_in varchar(30))
 BEGIN
 	SELECT id,priority,todo
 	FROM list
-	WHERE MATCH todo AGAINST (sort_in IN BOOLEAN MODE)
+	WHERE MATCH todo AGAINST (filter_in IN BOOLEAN MODE)
 	ORDER BY priority;
 
 END;
@@ -81,7 +81,7 @@ $$
 
 DELIMITER ;
 	
-/* move completed task to done table and delete from list */
+/* move completed task to done table and delete from list table */
 
 DROP PROCEDURE IF EXISTS do;
 
@@ -110,13 +110,13 @@ $$
 
 DELIMITER ;
 
-/* change the priority level of a task */
+/* change the priority level of a task 'call pri(ID_Number,New_Priority);' */
 
 DROP PROCEDURE IF EXISTS priority;
 
 DELIMITER $$
 
-CREATE PROCEDURE priority(
+CREATE PROCEDURE pri(
 	id_in smallint,
 	priority_in smallint)
 BEGIN
@@ -185,17 +185,17 @@ $$
 
 DELIMITER ;
 
-/* export list to skydrive (or dropbox) - you will need to add permissions to mysql, and delete todo.txt before running a second time */
+/* export list to onedrive (or dropbox) - you will need to add folder permissions to mysql, and delete todo.txt before running a second time */
 
-DROP PROCEDURE IF EXISTS skydrive;
+DROP PROCEDURE IF EXISTS onedrive;
 
 DELIMITER $$
 
-CREATE PROCEDURE skydrive()
+CREATE PROCEDURE onedrive()
 BEGIN
 	
 	SELECT id,priority,todo 
-	INTO OUTFILE '/Users/trip/SkyDrive/todo/todo.txt'
+	INTO OUTFILE '/Users/trip/OneDrive/todo/todo.txt'
 	LINES TERMINATED BY '\n'
 	FROM list
 	ORDER BY priority;
@@ -225,7 +225,7 @@ $$
 
 DELIMITER ;
 
-/* text search for completed tasks */
+/* text search for completed tasks in done table */
 
 DROP PROCEDURE IF EXISTS find;
 
@@ -244,3 +244,16 @@ END;
 $$
 
 DELIMITER ;
+
+/* todo - create help - list commands and usage 
+list
+filter
+do
+pri
+append
+prepend
+onedrive
+done
+find
+*/
+

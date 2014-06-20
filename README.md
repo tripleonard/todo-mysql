@@ -19,7 +19,7 @@ Start MySQL client
 	
 	mysql> use todo;
 
-Operators are used for sorting
+Suggested operators are used for filtering
 
 	@ - Context
 	# - Project
@@ -49,7 +49,7 @@ To list todos by priority then project
 	
 To list all todos with a specific context, project or person
 
-	mysql> call sort('@errand');
+	mysql> call filter('@errand');
 	+----+----------+-----------------------------+
 	| id | priority | todo                        |
 	+----+----------+-----------------------------+
@@ -66,7 +66,7 @@ To list the last 20 completed todos in descending completion order
 	
 To change a priority level, first input is id of task and second is new priority
 
-	mysql> call priority(1,2);
+	mysql> call pri(1,2);
 	
 To append text to the end of a task (make sure there is a preceding space if desired)
 
@@ -76,16 +76,14 @@ To prepend text to the beginning of a task (make sure there is a trailing space 
 
 	mysql> call prepend(23,'something at the beginning ');
 	
-To export list to skydrive (or dropbox) - this is a work in progress as you have to add mysql user permissions to folder and mysql cannot overwrite an existing file for security reasons.  So, you need to delete the exported file (todo.txt) to run this again. It's a kludge.
+To export list to onedrive (or dropbox) - this is a work in progress as you have to add mysql user permissions to folder and mysql cannot overwrite an existing file for security reasons.  So, you need to delete the exported file (todo.txt) to run this again. It's a kludge.
 
-	mysql> call skydrive;
+	mysql> call onedrive;
 	
-To search _completed_ tasks - this feature is not working as I would like.  It will only match on whole words and exact phrases of 4 characters or more right now.
+To search _completed_ tasks - this feature is not working as I would like.  It will only match on whole words and exact phrases of four(4) characters or more right now.
 
 	mysql> call find('apple');
-	
-Future features
----------------
+
 
 
 
