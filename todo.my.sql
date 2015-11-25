@@ -24,25 +24,25 @@ CREATE TABLE done(
 	FULLTEXT KEY(todo)
 	)ENGINE=MyISAM;
 
-	DROP TABLE IF EXISTS help;
-	CREATE TABLE help(
-		command text,
-		purpose text,
-	  example text
-		)ENGINE=MyISAM;
+DROP TABLE IF EXISTS help;
+CREATE TABLE help(
+	command text,
+	purpose text,
+  example text
+	)ENGINE=MyISAM;
 
-	INSERT INTO help(command,purpose,example)
-	VALUES
-	  ('new','add a new todo','mysql> call new(1,\'buy milk @errand #home\')\;'),
-	  ('list','list all open todos by by priority','mysql> call list\;'),
-	  ('filter','list all todos with a specific context, project, or person','mysql> call filter(\'@errand\')\;'),
-	  ('do','mark todo complete, remove from active todo list and insert into done table with completion date','mysql> call do(14)\;'),
-	  ('done','list the most recent 20 items from done list','mysql> call done\;'),
-	  ('pri','change priority of an item (id,priority level)','mysql> call pri(1,2)\;'),
-	  ('append','add text to the end of a todo item (make sure it starts with a space)','mysql> call append(23,\' something at the end\')\;'),
-	  ('prepend','add text to the beginnng of an item','mysql> call prepend(23,\'something at the beginning \')\;'),
-	  ('onedrive','export task list to local file system (caveat, see README.md','mysql> call onedrive\;'),
-	  ('find','full text search enabled by MYISAM engine (caveat, see README.md)','mysql> call find(\'apple\')\;');
+INSERT INTO help(command,purpose,example)
+VALUES
+  ('new','add a new todo','mysql> call new(1,\'buy milk @errand #home\')\;'),
+  ('list','list all open todos by by priority','mysql> call list\;'),
+  ('filter','list all todos with a specific context, project, or person','mysql> call filter(\'@errand\')\;'),
+  ('do','mark todo complete, remove from active todo list and insert into done table with completion date','mysql> call do(14)\;'),
+  ('done','list the most recent 20 items from done list','mysql> call done\;'),
+  ('pri','change priority of an item (id,priority level)','mysql> call pri(1,2)\;'),
+  ('append','add text to the end of a todo item (make sure it starts with a space)','mysql> call append(23,\' something at the end\')\;'),
+  ('prepend','add text to the beginnng of an item','mysql> call prepend(23,\'something at the beginning \')\;'),
+  ('onedrive','export task list to local file system (caveat, see README.md','mysql> call onedrive\;'),
+  ('find','full text search enabled by MYISAM engine (caveat, see README.md)','mysql> call find(\'apple\')\;');
 
 /* create a new todo */
 
