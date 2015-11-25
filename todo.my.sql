@@ -13,7 +13,7 @@ CREATE TABLE list(
 	date_created timestamp NOT NULL,
 	FULLTEXT KEY(todo)
 	)ENGINE=MyISAM;
-	
+
 DROP TABLE IF EXISTS done;
 CREATE TABLE done(
 	id int,
@@ -34,7 +34,7 @@ CREATE PROCEDURE new(
 	priority_in smallint,
 	todo_in text)
 BEGIN
-	
+
 	INSERT INTO list(priority,todo)
 	VALUES(priority_in,todo_in);
 
@@ -43,7 +43,7 @@ END;
 $$
 
 DELIMITER ;
-	
+
 /* list todos order by project then priority */
 
 DROP PROCEDURE IF EXISTS list;
@@ -80,7 +80,7 @@ END;
 $$
 
 DELIMITER ;
-	
+
 /* move completed task to done table and delete from list table */
 
 DROP PROCEDURE IF EXISTS do;
@@ -93,14 +93,14 @@ BEGIN
 	DECLARE Priority_v smallint;
 	DECLARE Todo_v text;
 	DECLARE DateCreated_v datetime;
-	
+
 	SELECT id,priority,todo,date_created INTO ListId_v,Priority_v,Todo_v,DateCreated_v
 	FROM todo.list
 	WHERE id_in=id;
 
 	INSERT INTO done(id,priority,todo,date_created)
 	VALUES (ListId_v,Priority_v,Todo_v,DateCreated_v);
-	
+
 	DELETE FROM list
 	WHERE id_in=list.id;
 
@@ -141,13 +141,13 @@ CREATE PROCEDURE append(
 BEGIN
 	DECLARE OldText_v text;
 	DECLARE NewText_v text;
-	
+
 	SELECT todo INTO OldText_v
 	FROM list
 	WHERE id_in=list.id;
-	
+
 	SELECT CONCAT(OldText_v, append_in) INTO NewText_v;
-	
+
 	UPDATE list SET todo=NewText_v
 	WHERE id_in=list.id;
 
@@ -169,13 +169,13 @@ CREATE PROCEDURE prepend(
 BEGIN
 	DECLARE OldText_v text;
 	DECLARE NewText_v text;
-	
+
 	SELECT todo INTO OldText_v
 	FROM list
 	WHERE id_in=list.id;
-	
+
 	SELECT CONCAT(prepend_in, OldText_v) INTO NewText_v;
-	
+
 	UPDATE list SET todo=NewText_v
 	WHERE id_in=list.id;
 
@@ -193,8 +193,8 @@ DELIMITER $$
 
 CREATE PROCEDURE onedrive()
 BEGIN
-	
-	SELECT id,priority,todo 
+
+	SELECT priority,todo 
 	INTO OUTFILE '/Users/trip/OneDrive/todo/todo.txt'
 	LINES TERMINATED BY '\n'
 	FROM list
@@ -233,7 +233,7 @@ DELIMITER $$
 
 CREATE PROCEDURE find(find_in text)
 BEGIN
-	SELECT id,priority,todo,date_completed 
+	SELECT id,priority,todo,date_completed
 	FROM done
 	WHERE MATCH todo AGAINST (find_in IN BOOLEAN MODE)
 	ORDER BY date_completed;
@@ -245,7 +245,7 @@ $$
 
 DELIMITER ;
 
-/* todo - create help - list commands and usage 
+/* todo - create help - list commands and usage
 list
 filter
 do
@@ -256,4 +256,3 @@ onedrive
 done
 find
 */
-
