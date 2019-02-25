@@ -90,7 +90,7 @@ DELIMITER $$
 
 CREATE PROCEDURE filter(filter_in varchar(30))
 BEGIN
-	SELECT id,priority,todo
+	SELECT priority,id,todo
 	FROM list
 	WHERE MATCH todo AGAINST (filter_in IN BOOLEAN MODE)
 	ORDER BY priority;
@@ -215,7 +215,7 @@ CREATE PROCEDURE onedrive()
 BEGIN
 
 	SELECT priority,todo
-	INTO OUTFILE '/Users/trip/OneDrive/todo/todo.txt'
+	INTO OUTFILE '/Users/trip/onedrive/todo/todo.txt'
 	LINES TERMINATED BY '\n'
 	FROM list
 	ORDER BY priority;
