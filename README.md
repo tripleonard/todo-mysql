@@ -3,23 +3,25 @@ A Todo List Manager as a MySQL Database
 
 Are you a MySQL DBA or have the mysql client open all the time? Do you want a cross
 platform todo list manager?  This (ridiculous waste of time?) may be for you. I have created a few
-stored procedures to do the work. Inspired by Gina Trapani's [todo.txt](https://github.com/ginatrapani/todo.txt-cli). ver 0.3
+stored procedures to do the work. Inspired by Gina Trapani's [todo.txt](https://github.com/ginatrapani/todo.txt-cli).
 
 Installation
 ------------
 
-	mysql -u username -p -h localhost < todo.my.sql
+	$ git clone https://github.com/tripleonard/todo-mysql.git
+
+	$ mysql -u username -p -h localhost < todo.my.sql
 
 Usage
 -----
 
-Start MySQL client
+Start MySQL server (Mac) and access the database
 
-	mysql -u username -p
+	$ mysql.server start
 
-	mysql> use todo;
+	$ mysql todo
 
-Suggested operators are used for filtering
+Suggested operators are used for filtering (just a suggestion)
 
 	@ - Context
 	# - Project
