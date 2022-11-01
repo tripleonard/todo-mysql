@@ -10,7 +10,7 @@ CREATE TABLE list(
 	id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	priority smallint,
 	todo text,
-	date_created timestamp NOT NULL,
+	date_created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	FULLTEXT KEY(todo)
 	)ENGINE=MyISAM;
 
@@ -20,7 +20,7 @@ CREATE TABLE done(
 	priority smallint,
 	todo text,
 	date_created datetime,
-	date_completed timestamp NOT NULL,
+	date_completed timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	FULLTEXT KEY(todo)
 	)ENGINE=MyISAM;
 
